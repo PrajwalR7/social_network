@@ -1,26 +1,17 @@
 package utils
 
-type stringArr []string
-
-// Polyfill function which adds the include method to []string type similar to what we have in JS
-func (s stringArr) includes(key string) bool {
-	for _, val := range s {
-		if val == key {
-			return true
-		}
-	}
-	return false
-}
+import "slices"
 
 func FilterUsers(usermap map[string][]string, filterList []string) []string {
-	var totalList stringArr
+	var totalList []string
 	for keys := range usermap {
 		totalList = append(totalList, keys)
 	}
+	totalList = totalList[:]
 	filteredList := make([]string, 0)
 
 	for _, filterItem := range filterList {
-		if !totalList.includes(filterItem) {
+		if !slices.Contains(totalList, filterItem) {
 			filteredList = append(filteredList, filterItem)
 		}
 	}
