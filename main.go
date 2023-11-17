@@ -22,7 +22,7 @@ func Validate(args ...interface{}) {
 func main() {
 	args := os.Args[1:]
 
-	command := args[0]
+	command := args[0] // command contains the action the user wants to perform
 
 	user_graph := user_graph.NewUserGraph()
 
@@ -56,6 +56,7 @@ func main() {
 		}
 	}
 
+	// Storing the current snapshot of user graph in a file
 	f, err := os.OpenFile("user_graph_offline.txt", os.O_RDWR|os.O_CREATE, 0777)
 	if err != nil {
 		Print("Unable to store the curr user graph offline")
